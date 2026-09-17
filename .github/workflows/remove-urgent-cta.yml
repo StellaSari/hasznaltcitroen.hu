@@ -1,0 +1,45 @@
+name: Remove urgency CTA copy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-urgent-cta.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Remove urgency and vulnerability copy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          blocks = [
+              '          <p><strong>FONTOS:</strong> Az autó 2026. szeptember 15. óta egy érdi telken, roncsautók között tengeti napjait. Az érdi közterület-felügyelet kérte az elszállítását, a jogszabályoknak megfelelően.</p>\n',
+              '          <p><strong>A jelenlegi tárolás 2026. szeptember 18-án 9:00 óráig biztosított, ezért az értékesítés sürgős.</strong></p>\n',
+              '          <p><strong>Ha lát benne lehetőséget, lehet Ön a megmentő.</strong></p>\n',
+          ]
+          for block in blocks:
+              s = s.replace(block, '')
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Remove one-time workflow and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/remove-urgent-cta.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Remove urgency copy from final CTA'
+          git push
