@@ -743,6 +743,88 @@
     .contact-links a:hover { text-decoration:underline; text-underline-offset:5px; }
     .cta .contact-links a { color:white; }
 
+    /* 2026-09-17: simplified sales price panels */
+    .offer-card {
+      text-align:center;
+      align-items:center;
+      justify-content:center;
+      gap:28px;
+    }
+    .offer-card > div:first-child { width:100%; }
+    .offer-card .label,
+    .price-cta .label {
+      display:block;
+      margin-bottom:14px;
+      font-family:var(--text);
+      font-size:.8rem;
+      font-weight:600;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    .old-price {
+      display:block;
+      margin:0;
+      font-family:var(--text);
+      font-size:clamp(3rem,6vw,5.5rem);
+      font-weight:700;
+      line-height:.95;
+      letter-spacing:-.055em;
+      text-align:center;
+      text-decoration-line:line-through;
+      text-decoration-thickness:3px;
+      text-decoration-color:currentColor;
+    }
+    .current-price-label {
+      display:block;
+      margin:24px 0 4px;
+      font-family:var(--text);
+      font-size:.88rem;
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      text-align:center;
+    }
+    .offer-card .price,
+    .price-cta .price {
+      margin:0;
+      font-family:var(--text);
+      font-size:clamp(2.7rem,5.4vw,4.8rem);
+      font-weight:700;
+      line-height:1;
+      letter-spacing:-.05em;
+      text-align:center;
+    }
+    .offer-card .contact-links,
+    .price-cta .contact-links {
+      width:100%;
+      align-items:center;
+      margin-top:10px;
+      gap:12px;
+      text-align:center;
+    }
+    .offer-card .contact-links a,
+    .price-cta .contact-links a {
+      font-family:var(--text);
+      font-size:clamp(1.15rem,2vw,1.45rem);
+      font-weight:400;
+      letter-spacing:.02em;
+    }
+    .price-cta {
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height:430px;
+    }
+    .price-cta .old-price,
+    .price-cta .current-price-label,
+    .price-cta .price { color:white; }
+    .price-cta .label { color:rgba(255,255,255,.86); }
+    @media (max-width:620px) {
+      .price-cta { min-height:360px; }
+    }
+
 </style>
 </head>
 <body>
@@ -777,9 +859,8 @@
             <div>
               <span class="label">Vételár</span>
               <span class="old-price">390 000 Ft</span>
-              <span class="current-price-label">Most</span>
+              <span class="current-price-label">Akciósan</span>
               <div class="price">250 000 Ft</div>
-              <p>A vevő által megszervezett és fizetett elszállítással. Utólagos szállítási levonás nélkül.</p>
             </div>
             <div class="contact-links" aria-label="Kapcsolat">
               <a href="tel:+36304653834">06 30 465 3834</a>
@@ -1130,9 +1211,11 @@
 
     <section class="cta">
       <div class="wrap">
-        <div class="cta-panel">
-          <h2>Érdekli az autó? Itt tud érdeklődni.</h2>
-          <p>Kérdés esetén hívjon vagy küldjön emailt. A megtekintés előre egyeztetett időpontban lehetséges. Az elszállítást a vevő szervezi és fizeti.</p>
+        <div class="cta-panel price-cta">
+          <span class="label">Vételár</span>
+          <span class="old-price">390 000 Ft</span>
+          <span class="current-price-label">Akciósan</span>
+          <div class="price">250 000 Ft</div>
           <div class="contact-links" aria-label="Kapcsolat">
             <a href="tel:+36304653834">06 30 465 3834</a>
             <a href="#" class="email-link">Email küldése</a>
