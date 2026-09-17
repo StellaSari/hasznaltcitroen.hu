@@ -710,6 +710,39 @@
     /* 2026-09-17: hero quick facts visibility fix */
     .hero .fact strong { color: var(--ink); }
 
+    /* 2026-09-17: pricing and low-friction contact */
+    .old-price {
+      display:block;
+      margin:18px 0 5px;
+      font-size:1.15rem;
+      font-weight:800;
+      color:#5e5f50;
+      text-decoration:line-through;
+      text-decoration-thickness:2px;
+    }
+    .current-price-label {
+      display:block;
+      margin-bottom:7px;
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .contact-links {
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:10px;
+      margin-top:28px;
+    }
+    .contact-links a {
+      font-weight:900;
+      text-decoration:none;
+      color:var(--ink);
+    }
+    .contact-links a:hover { text-decoration:underline; text-underline-offset:5px; }
+    .cta .contact-links a { color:white; }
+
 </style>
 </head>
 <body>
@@ -743,11 +776,15 @@
           <aside class="offer-card">
             <div>
               <span class="label">Vételár</span>
+              <span class="old-price">390 000 Ft</span>
+              <span class="current-price-label">Most</span>
               <div class="price">250 000 Ft</div>
               <p>A vevő által megszervezett és fizetett elszállítással. Utólagos szállítási levonás nélkül.</p>
             </div>
-            <a class="button" href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%ADr%C3%A1sos%20aj%C3%A1nlat">Írásos ajánlatot teszek</a>
-            <a class="hero-phone" href="tel:+36304653834">06 30 465 3834</a>
+            <div class="contact-links" aria-label="Kapcsolat">
+              <a href="tel:+36304653834">06 30 465 3834</a>
+              <a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%A9rdekl%C5%91d%C3%A9s">Email küldése</a>
+            </div>
           </aside>
         </div>
 
@@ -1079,7 +1116,7 @@
         </div>
 
         <div class="process">
-          <article class="step"><span class="num">01</span><h3>Írásos ajánlat</h3><p>A vevő megjelöli a ténylegesen fizetendő vételárat és visszaigazolja, hogy az elszállítást saját költségén szervezi.</p></article>
+          <article class="step"><span class="num">01</span><h3>Érdeklődés</h3><p>Telefonon vagy emailben tud érdeklődni az autóról és megtekintési időpontot egyeztetni.</p></article>
           <article class="step"><span class="num">02</span><h3>Helyszíni megtekintés</h3><p>Előre egyeztetett időpontban. Független szakember hozható; beavatkozás csak a tulajdonos előzetes engedélyével.</p></article>
           <article class="step"><span class="num">03</span><h3>Adásvétel és átadás</h3><p>Szabályos szerződés, igazolt fizetés, kulcs és okmányok átadása, majd autómentős elszállítás.</p></article>
         </div>
@@ -1094,9 +1131,12 @@
     <section class="cta">
       <div class="wrap">
         <div class="cta-panel">
-          <h2>Lát lehetőséget az autóban? Várom ajánlatát.</h2>
-          <p>Kérem, ajánlatában írja meg a ténylegesen fizetendő vételárat, a megtekintés tervezett időpontját, és azt, hogy az elszállítást saját költségén vállalja.</p>
-          <a class="button" href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%ADr%C3%A1sos%20aj%C3%A1nlat&body=Aj%C3%A1nlott%20v%C3%A9tel%C3%A1r%3A%0AMegtekint%C3%A9s%20tervezett%20ideje%3A%0ASaj%C3%A1t%20k%C3%B6lts%C3%A9g%C5%B1%20elsz%C3%A1ll%C3%ADt%C3%A1st%20v%C3%A1llalom%3A%20igen%2Fnem">Ajánlat küldése emailben</a>
+          <h2>Érdekli az autó? Itt tud érdeklődni.</h2>
+          <p>Kérdés esetén hívjon vagy küldjön emailt. A megtekintés előre egyeztetett időpontban lehetséges. Az elszállítást a vevő szervezi és fizeti.</p>
+          <div class="contact-links" aria-label="Kapcsolat">
+            <a href="tel:+36304653834">06 30 465 3834</a>
+            <a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%A9rdekl%C5%91d%C3%A9s">Email küldése</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1122,7 +1162,7 @@
           <button type="button" id="cookie-settings">Sütibeállítások</button>
         </div>
       </div>
-      <div><span class="footer-label">Kapcsolat</span><a href="tel:+36304653834">06 30 465 3834</a><br><a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%ADr%C3%A1sos%20aj%C3%A1nlat">eszter.pasztor@proton.me</a></div>
+      <div><span class="footer-label">Kapcsolat</span><a href="tel:+36304653834">06 30 465 3834</a><br><a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%A9rdekl%C5%91d%C3%A9s">Email küldése</a></div>
       <div><span class="footer-label">Státusz</span>Magánértékesítés · Érd<br>Frissítve: 2026. szeptember 17.</div>
     </div>
   </footer>
