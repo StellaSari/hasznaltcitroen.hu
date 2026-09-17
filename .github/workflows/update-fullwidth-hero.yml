@@ -1,0 +1,114 @@
+name: Update full-width hero
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-fullwidth-hero.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Make lamp photo the full-width hero
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* 2026-09-17: full-width lamp hero */'
+
+          css = r'''
+
+    /* 2026-09-17: full-width lamp hero */
+    .hero {
+      position: relative;
+      min-height: 900px;
+      padding: clamp(64px, 7vw, 96px) 0 96px;
+      color: white;
+      background-color: var(--black);
+      background-image:
+        linear-gradient(90deg, rgba(20,17,23,.76) 0%, rgba(20,17,23,.48) 48%, rgba(20,17,23,.18) 100%),
+        linear-gradient(0deg, rgba(20,17,23,.94) 0%, rgba(20,17,23,.18) 58%, rgba(20,17,23,.04) 100%),
+        url('images/35-zarokep-img-1142.webp');
+      background-repeat: no-repeat;
+      background-position: center, center, center top;
+      background-size: cover, cover, 100% auto;
+    }
+    .hero > .wrap { position: relative; z-index: 1; }
+    .hero .eyebrow {
+      color: white;
+      border-color: rgba(255,255,255,.44);
+      background: rgba(28,24,31,.34);
+      backdrop-filter: blur(10px);
+    }
+    .hero h1, .hero .lead { text-shadow: 0 3px 22px rgba(0,0,0,.34); }
+    .hero h1 .trim { color: #fff; }
+    .hero .lead { color: rgba(255,255,255,.93); }
+
+    /* The same photo is now the hero background, so the old inset copy is hidden. */
+    .hero .hero-photo { display: none; }
+    .hero .hero-grid {
+      grid-template-columns: minmax(300px, 390px);
+      justify-content: end;
+      margin-top: 58px;
+    }
+    .hero .offer-card { min-height: 390px; }
+    .hero .quickfacts { margin-top: 52px; }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: 0;
+        background-size: cover, cover, 100% auto;
+      }
+      .hero .hero-grid {
+        grid-template-columns: minmax(0, 430px);
+        justify-content: start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        padding-top: 36px;
+        padding-bottom: 72px;
+        background-image:
+          linear-gradient(180deg, rgba(20,17,23,.40) 0%, rgba(20,17,23,.58) 34%, rgba(20,17,23,.96) 64%, rgba(20,17,23,1) 100%),
+          url('images/35-zarokep-img-1142.webp');
+        background-position: center, center top;
+        background-size: cover, 100% auto;
+      }
+      .hero .hero-grid { margin-top: 44px; }
+      .hero .offer-card { min-height: 0; }
+      .hero .quickfacts { margin-top: 36px; }
+    }
+'''
+
+          if marker not in s:
+              s = s.replace('</style>', css + '\n</style>', 1)
+
+          old = '<div class="hero">'
+          new = '<div class="hero" role="img" aria-label="Citroën C4 első fényszórója és első lökhárítója, a teljes lámpatest látható">'
+          if old in s and new not in s:
+              s = s.replace(old, new, 1)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Remove one-time workflow and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/update-fullwidth-hero.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Use lamp photo as full-width opening hero'
+          git push
