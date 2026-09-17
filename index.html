@@ -783,7 +783,7 @@
             </div>
             <div class="contact-links" aria-label="Kapcsolat">
               <a href="tel:+36304653834">06 30 465 3834</a>
-              <a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%A9rdekl%C5%91d%C3%A9s">Email küldése</a>
+              <a href="#" class="email-link">Email küldése</a>
             </div>
           </aside>
         </div>
@@ -1135,7 +1135,7 @@
           <p>Kérdés esetén hívjon vagy küldjön emailt. A megtekintés előre egyeztetett időpontban lehetséges. Az elszállítást a vevő szervezi és fizeti.</p>
           <div class="contact-links" aria-label="Kapcsolat">
             <a href="tel:+36304653834">06 30 465 3834</a>
-            <a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%A9rdekl%C5%91d%C3%A9s">Email küldése</a>
+            <a href="#" class="email-link">Email küldése</a>
           </div>
         </div>
       </div>
@@ -1162,7 +1162,7 @@
           <button type="button" id="cookie-settings">Sütibeállítások</button>
         </div>
       </div>
-      <div><span class="footer-label">Kapcsolat</span><a href="tel:+36304653834">06 30 465 3834</a><br><a href="mailto:eszter.pasztor@proton.me?subject=JZV-662%20%C3%A9rdekl%C5%91d%C3%A9s">Email küldése</a></div>
+      <div><span class="footer-label">Kapcsolat</span><a href="tel:+36304653834">06 30 465 3834</a><br><a href="#" class="email-link">Email küldése</a></div>
       <div><span class="footer-label">Státusz</span>Magánértékesítés · Érd<br>Frissítve: 2026. szeptember 17.</div>
     </div>
   </footer>
@@ -1202,6 +1202,17 @@
       no.addEventListener('click', () => banner.classList.remove('is-open'));
       close.addEventListener('click', () => banner.classList.remove('is-open'));
     })();
+  </script>
+
+  <script>
+    document.querySelectorAll('.email-link').forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const codes = [101,115,122,116,101,114,46,112,97,115,122,116,111,114,64,112,114,111,116,111,110,46,109,101];
+        const address = String.fromCharCode.apply(null, codes);
+        window.location.href = 'mailto:' + address + '?subject=' + encodeURIComponent('JZV-662 érdeklődés');
+      });
+    });
   </script>
 </body>
 </html>
